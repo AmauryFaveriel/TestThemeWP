@@ -13,6 +13,7 @@
      */
     wp_head();
     ?>
+    <title><?php the_title() ?></title>
 </head>
 
 <body <?php body_class(); ?>>

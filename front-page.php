@@ -11,7 +11,11 @@ get_header();
  * Sans the_post(), on ne pourrait pas utiliser les fonctions juste en dessous
  */
 the_post();
+?>
 
+<h1><?php the_title() ?></h1>
+
+<?php
 $args = array(
     'post_type' => 'post',
     'posts_per_page' => 10,
@@ -31,7 +35,7 @@ if ($query_posts->have_posts() ):
 
     <div class="article">
         <h2><?=the_title()?></h2>
-        
+
         <a href="<?php the_permalink() ?>">En savoir plus</a>
     </div>
 
@@ -44,8 +48,26 @@ else:
 
 <?php
 endif;
+
+$args = array(
+    'post_type' => 'page',
+    'pagename' => 'qui-sommes-nous'
+);
+$query_page = new WP_Query($args);
+if ($query_page->have_posts()):
+    $query_page->the_post();
 ?>
 
+<div class="banner">
+    <h2><?php the_title() ?></h2>
+    <p><?php the_excerpt() ?></p>
+    <a href="<?php the_permalink() ?>">Lire la suite</a>
+</div>
+
+<?php
+endif;
+wp_reset_postdata();
+?>
 
 
 <?php
